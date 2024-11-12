@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, MonolitoFinanceiro.View.CadastroPadrao,
   Data.DB, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls,
-  Vcl.ExtCtrls, Vcl.WinXPanels,MonolitoFinanceiro.Model.Usuarios, MonolitoFinanceiro.Utilitarios, Vcl.WinXCtrls;
+  Vcl.ExtCtrls, Vcl.WinXPanels, MonolitoFinanceiro.Model.Usuarios, MonolitoFinanceiro.Utilitarios, Vcl.WinXCtrls;
 
 type
   TFrm_CadastroUsuarios = class(TFrm_CadastroPadrao)
@@ -128,7 +128,12 @@ begin
        Abort;
      end;
   //-------------------------------------------------------------------
-
+  if DataModule_Usuarios.temLoginCadastrado(Trim(txt_Login.Text), DataModule_Usuarios.ClientDataSet_Usuarios.FieldByName('ID').AsString) then
+    begin
+      txt_Login.SetFocus;
+      Application.MessageBox(PWideChar(Format('O login %s já se encontra cadastrado!', [txt_Login.Text])), 'Atenção', MB_OK + MB_ICONWARNING);
+      Abort;
+    end;
   //---------valida o estado do usuário(ativado ou bloqueado)----------
   Status := 'A';
 

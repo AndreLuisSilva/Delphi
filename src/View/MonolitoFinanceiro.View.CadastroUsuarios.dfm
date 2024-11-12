@@ -6,7 +6,6 @@ inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
     StyleElements = [seFont, seClient, seBorder]
     inherited card_cadastros: TCard
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitLeft = 2
       object lbl_Nome: TLabel [0]
         Left = 16
         Top = 56
@@ -37,9 +36,6 @@ inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
       end
       inherited Panel1: TPanel
         StyleElements = [seFont, seClient, seBorder]
-        inherited btn_cancelar: TButton
-          ExplicitLeft = 647
-        end
         inherited btn_salvar: TButton
           OnClick = btn_salvarClick
         end
@@ -91,9 +87,6 @@ inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
       end
       inherited pnl_botoes: TPanel
         StyleElements = [seFont, seClient, seBorder]
-        inherited btn_incluir: TButton
-          ExplicitLeft = -6
-        end
         inherited btn_excluir: TButton
           OnClick = btn_excluirClick
         end

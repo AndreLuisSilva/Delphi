@@ -24,6 +24,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    function temLoginCadastrado(Login : String; ID :string) : Boolean;
   end;
 
 var
@@ -34,5 +35,30 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+{ TDataModule_Usuarios }
+
+function TDataModule_Usuarios.temLoginCadastrado(Login, ID: string): Boolean;
+var
+  SQLConsulta : TFDQuery;
+begin
+  Result := False;
+  SQLConsulta := TFDQuery.Create(nil);
+  try
+    SQLConsulta.Connection := DataModule_PgConexao.TFDConnection_PgConexao;
+    SQLConsulta.SQL.Clear;
+    SQLConsulta.SQL.Add('SELECT id FROM usuarios WHERE login = :LOGIN');
+    SQLConsulta.ParamByName('LOGIN').AsString := Login;
+    SQLConsulta.Open();
+
+    if not SQLConsulta.IsEmpty then
+      Result := SQLConsulta.FieldByName('ID').AsString <> ID;
+
+  finally
+    SQLConsulta.Close;
+    SQLConsulta.Free;
+  end;
+
+end;
 
 end.
