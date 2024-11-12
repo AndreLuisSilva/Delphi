@@ -1,0 +1,16 @@
+object Frm_PgSqlConexao: TFrm_PgSqlConexao
+  OnCreate = DataModuleCreate
+  Height = 480
+  Width = 640
+  object SQL_Usuarios: TFDQuery
+    Connection = PgSqlConexao
+    SQL.Strings = (
+      'SELECT * FROM usuarios;')
+    Left = 432
+    Top = 400
+  end
+  object PgSqlConexao: TFDConnection
+    Left = 544
+    Top = 400
+  end
+end

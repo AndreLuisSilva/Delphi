@@ -1,0 +1,45 @@
+inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
+  Caption = 'Cadastro de Usu'#225'rios'
+  StyleElements = [seFont, seClient, seBorder]
+  ExplicitLeft = -16
+  ExplicitTop = -91
+  TextHeight = 21
+  inherited Pnl_Principal: TCardPanel
+    StyleElements = [seFont, seClient, seBorder]
+    inherited card_cadastros: TCard
+      StyleElements = [seFont, seClient, seBorder]
+      inherited Panel1: TPanel
+        StyleElements = [seFont, seClient, seBorder]
+      end
+    end
+    inherited card_pesquisa: TCard
+      StyleElements = [seFont, seClient, seBorder]
+      inherited pnl_pesquisar: TPanel
+        StyleElements = [seFont, seClient, seBorder]
+        inherited lbl_pesquisar: TLabel
+          StyleElements = [seFont, seClient, seBorder]
+        end
+        inherited txt_pesquisar: TEdit
+          StyleElements = [seFont, seClient, seBorder]
+        end
+        inherited btn_pesquisar: TButton
+          OnClick = btn_pesquisarClick
+        end
+      end
+      inherited pnl_botoes: TPanel
+        StyleElements = [seFont, seClient, seBorder]
+      end
+      inherited pnl_grid: TPanel
+        StyleElements = [seFont, seClient, seBorder]
+        inherited DBGrid1: TDBGrid
+          DataSource = DS_Grid_Usuarios
+        end
+      end
+    end
+  end
+  object DS_Grid_Usuarios: TDataSource
+    DataSet = DataModule_Usuarios.ClientDataSet_Usuarios
+    Left = 601
+    Top = 410
+  end
+end

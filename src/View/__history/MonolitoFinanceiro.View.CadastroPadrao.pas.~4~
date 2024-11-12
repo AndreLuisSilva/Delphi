@@ -1,0 +1,44 @@
+unit MonolitoFinanceiro.View.CadastroPadrao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.WinXPanels, System.ImageList, Vcl.ImgList;
+
+type
+  TFrm_CadastroPadrao = class(TForm)
+    Pnl_Principal: TCardPanel;
+    card_cadastros: TCard;
+    card_pesquisa: TCard;
+    pnl_pesquisar: TPanel;
+    pnl_botoes: TPanel;
+    pnl_grid: TPanel;
+    txt_pesquisar: TEdit;
+    lbl_pesquisar: TLabel;
+    btn_pesquisar: TButton;
+    DBGrid1: TDBGrid;
+    ImageList1: TImageList;
+    btn_fechar: TButton;
+    btn_imprimir: TButton;
+    btn_incluir: TButton;
+    btn_alterar: TButton;
+    btn_excluir: TButton;
+    Panel1: TPanel;
+    btn_cancelar: TButton;
+    btn_salvar: TButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Frm_CadastroPadrao: TFrm_CadastroPadrao;
+
+implementation
+
+{$R *.dfm}
+
+end.
