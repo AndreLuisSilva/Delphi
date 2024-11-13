@@ -29,7 +29,8 @@ implementation
 uses
   MonolitoFinanceiro.View.CadastroPadrao,
   MonolitoFinanceiro.View.CadastroUsuarios,
-  MonolitoFinanceiro.View.Splash;
+  MonolitoFinanceiro.View.Splash,
+  MonolitoFinanceiro.View.Login;
 
 {$R *.dfm}
 
@@ -42,6 +43,16 @@ begin
      Frm_Splash.ShowModal;
   finally
       FreeAndNil(Frm_Splash);
+  end;
+
+  Frm_Login := TFrm_Login.Create(Nil);
+
+  try
+     Frm_Login.ShowModal;
+     if Frm_Login.ShowModal <> mrOk then
+      Application.Terminate;
+  finally
+      FreeAndNil(Frm_Login);
   end;
 
 end;

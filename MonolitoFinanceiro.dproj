@@ -154,6 +154,10 @@
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="src\Util\MonolitoFinanceiro.Utilitarios.pas"/>
+        <DCCReference Include="src\View\MonolitoFinanceiro.View.Login.pas">
+            <Form>Frm_Login</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

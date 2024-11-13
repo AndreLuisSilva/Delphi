@@ -8,7 +8,8 @@ uses
   MonolitoFinanceiro.Model.Conexao in 'src\Model\MonolitoFinanceiro.Model.Conexao.pas' {DataModule_PgConexao: TDataModule},
   MonolitoFinanceiro.View.CadastroUsuarios in 'src\View\MonolitoFinanceiro.View.CadastroUsuarios.pas' {Frm_CadastroUsuarios},
   MonolitoFinanceiro.Model.Usuarios in 'src\Model\MonolitoFinanceiro.Model.Usuarios.pas' {DataModule_Usuarios: TDataModule},
-  MonolitoFinanceiro.Utilitarios in 'src\Util\MonolitoFinanceiro.Utilitarios.pas';
+  MonolitoFinanceiro.Utilitarios in 'src\Util\MonolitoFinanceiro.Utilitarios.pas',
+  MonolitoFinanceiro.View.Login in 'src\View\MonolitoFinanceiro.View.Login.pas' {Frm_Login};
 
 {$R *.res}
 
@@ -18,7 +19,6 @@ begin
   Application.CreateForm(TDataModule_PgConexao, DataModule_PgConexao);
   Application.CreateForm(TFrm_Principal, Frm_Principal);
   Application.CreateForm(TFrm_CadastroPadrao, Frm_CadastroPadrao);
-  Application.CreateForm(TFrm_Splash, Frm_Splash);
   Application.CreateForm(TFrm_CadastroUsuarios, Frm_CadastroUsuarios);
   Application.CreateForm(TDataModule_Usuarios, DataModule_Usuarios);
   Application.Run;

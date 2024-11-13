@@ -1,0 +1,28 @@
+unit MonolitoFinanceiro.View.Login;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage;
+
+type
+  TFrm_Login = class(TForm)
+    pnl_login_left: TPanel;
+    Image1: TImage;
+    pnl_login_right: TPanel;
+    pnl_login_top: TPanel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Frm_Login: TFrm_Login;
+
+implementation
+
+{$R *.dfm}
+
+end.
