@@ -7,7 +7,8 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Datasnap.Provider,
   Datasnap.DBClient, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  MonolitoFinanceiro.Model.Conexao;
+  MonolitoFinanceiro.Model.Conexao,
+  MonolitoFinanceiro.Model.Entidades.Usuarios;
 
 type
   TDataModule_Usuarios = class(TDataModule)
@@ -20,25 +21,17 @@ type
     ClientDataSet_Usuariossenha: TWideStringField;
     ClientDataSet_Usuariosstatus: TWideStringField;
     ClientDataSet_Usuariosdata: TDateField;
+    procedure DataModuleCreate(Sender: TObject);
+    procedure DataModuleDestroy(Sender: TObject);
   private
-    FnomeUsuarioLogado: String;
-    FloginUsuarioLogado: String;
-    FidUsuarioLogado: String;
-    procedure SetnomeUsuarioLogado(const Value: String);
-    procedure SetidUsuarioLogado(const Value: String);
-    procedure SetloginUsuarioLogado(const Value: String);
+    FEntidadeUsuario: TModelEntidadeUsuario;
     { Private declarations }
   public
     { Public declarations }
     function temLoginCadastrado(Login : String; ID :string) : Boolean;
     procedure efetuarLogin(Usuario : String; Senha : String);
-
-    property nomeUsuarioLogado : String read FnomeUsuarioLogado write SetnomeUsuarioLogado;
-    property loginUsuarioLogado : String read FloginUsuarioLogado write SetloginUsuarioLogado;
-    property idUsuarioLogado : String read FidUsuarioLogado write SetidUsuarioLogado;
-
+    function getUsuarioLogado: TModelEntidadeUsuario;
   end;
-
 var
   DataModule_Usuarios: TDataModule_Usuarios;
 
@@ -50,6 +43,16 @@ implementation
 
 { TDataModule_Usuarios }
 
+procedure TDataModule_Usuarios.DataModuleCreate(Sender: TObject);
+begin
+  FEntidadeUsuario := TModelEntidadeUsuario.Create;
+end;
+
+procedure TDataModule_Usuarios.DataModuleDestroy(Sender: TObject);
+begin
+  FEntidadeUsuario.Free;
+end;
+
 procedure TDataModule_Usuarios.efetuarLogin(Usuario, Senha: String);
 var
  SQLConsulta : TFDQuery;
@@ -58,7 +61,7 @@ begin
  try
   SQLConsulta.Connection := DataModule_PgConexao.TFDConnection_PgConexao;
   SQLConsulta.SQL.Clear;
-  SQLConsulta.SQL.Add('SELECT id FROM usuarios WHERE login = :LOGIN AND senha = :SENHA');
+  SQLConsulta.SQL.Add('SELECT * FROM usuarios WHERE login = :LOGIN AND senha = :SENHA');
   SQLConsulta.ParamByName('LOGIN').AsString := Usuario;
   SQLConsulta.ParamByName('SENHA').AsString := Senha;
   SQLConsulta.Open();
@@ -68,25 +71,18 @@ begin
   if SQLConsulta.FieldByName('STATUS').AsString <> 'A' then
     raise Exception.Create('Usuário bloqueado, favor entrar em contato com o administrador!');
 
+  FEntidadeUsuario.idUsuarioLogado := SQLConsulta.FieldByName('ID').AsString;
+  FEntidadeUsuario.nomeUsuarioLogado := SQLConsulta.FieldByName('NOME').AsString;
+  FEntidadeUsuario.loginUsuarioLogado := SQLConsulta.FieldByName('LOGIN').AsString;
  finally
   SQLConsulta.Close;
   SQLConsulta.Free;
  end;
 end;
 
-procedure TDataModule_Usuarios.SetidUsuarioLogado(const Value: String);
+function TDataModule_Usuarios.getUsuarioLogado: TModelEntidadeUsuario;
 begin
-  FidUsuarioLogado := Value;
-end;
-
-procedure TDataModule_Usuarios.SetloginUsuarioLogado(const Value: String);
-begin
-  FloginUsuarioLogado := Value;
-end;
-
-procedure TDataModule_Usuarios.SetnomeUsuarioLogado(const Value: String);
-begin
-  FnomeUsuarioLogado := Value;
+  Result := FEntidadeUsuario;
 end;
 
 function TDataModule_Usuarios.temLoginCadastrado(Login, ID: string): Boolean;

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
-  Vcl.StdCtrls;
+  Vcl.StdCtrls, MonolitoFinanceiro.Model.Usuarios;
 
 type
   TFrm_Login = class(TForm)
@@ -16,15 +16,17 @@ type
     img_login: TImage;
     lbl_top: TLabel;
     pnl_usuario: TPanel;
-    lbl_usuario: TLabel;
-    txt_usuario: TEdit;
     pnl_bottom: TPanel;
     btn_entrar: TButton;
     btn_cancelar: TButton;
     pnl_senha: TPanel;
+    lbl_usuario: TLabel;
+    txt_usuario: TEdit;
     lbl_senha: TLabel;
     txt_senha: TEdit;
     procedure btn_entrarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btn_cancelarClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -39,6 +41,10 @@ implementation
 
 {$R *.dfm}
 
+procedure TFrm_Login.btn_cancelarClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
 
 procedure TFrm_Login.btn_entrarClick(Sender: TObject);
 begin
@@ -55,6 +61,24 @@ begin
     Application.MessageBox('Informe a sua senha!', 'Atenção', MB_OK + MB_ICONWARNING);
     Abort;
   end;
+
+  try
+    DataModule_Usuarios.efetuarLogin(Trim(txt_usuario.Text), Trim(txt_senha.Text));
+    ModalResult := mrOk;
+  Except
+    on Erro: Exception do
+    begin
+      Application.MessageBox(PWideChar(Erro.Message), 'Atenção', MB_OK + MB_ICONWARNING);
+      txt_usuario.SetFocus;
+    end;
+
+  end;
+
+end;
+
+procedure TFrm_Login.FormShow(Sender: TObject);
+begin
+  txt_usuario.SetFocus;
 end;
 
 end.

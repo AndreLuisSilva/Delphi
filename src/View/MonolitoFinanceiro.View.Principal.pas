@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ComCtrls,
+  MonolitoFinanceiro.Model.Usuarios;
 
 type
   TFrm_Principal = class(TForm)
@@ -13,6 +14,7 @@ type
     main_relatorios: TMenuItem;
     main_ajuda: TMenuItem;
     menu_usuarios: TMenuItem;
+    StatusBar1: TStatusBar;
     procedure FormCreate(Sender: TObject);
     procedure menu_usuariosClick(Sender: TObject);
   private
@@ -54,7 +56,7 @@ begin
   finally
       FreeAndNil(Frm_Login);
   end;
-
+  //StatusBar1.Panels.Items[1].Text := 'Usuário: ' + DataModule_Usuarios.getUsuarioLogado.nomeUsuarioLogado;
 end;
 
 procedure TFrm_Principal.menu_usuariosClick(Sender: TObject);

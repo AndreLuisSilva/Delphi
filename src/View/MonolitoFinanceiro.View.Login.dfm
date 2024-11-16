@@ -1,12 +1,11 @@
 object Frm_Login: TFrm_Login
   Left = 0
   Top = 0
-  AutoSize = True
   BorderIcons = [biSystemMenu]
   BorderStyle = bsNone
   Caption = 'Login'
-  ClientHeight = 331
-  ClientWidth = 601
+  ClientHeight = 367
+  ClientWidth = 615
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,35 +13,34 @@ object Frm_Login: TFrm_Login
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesktopCenter
+  OnShow = FormShow
   TextHeight = 15
   object pnl_pricipal: TPanel
     Left = 0
     Top = 0
-    Width = 601
-    Height = 331
+    Width = 615
+    Height = 367
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = 360
-    ExplicitTop = 192
-    ExplicitWidth = 185
-    ExplicitHeight = 41
+    ExplicitWidth = 599
+    ExplicitHeight = 328
     object pnl_left: TPanel
       Left = 0
       Top = 0
       Width = 173
-      Height = 331
+      Height = 367
       Align = alLeft
       BevelOuter = bvNone
       Color = cl3DLight
       ParentBackground = False
       TabOrder = 0
-      ExplicitHeight = 311
+      ExplicitHeight = 328
       object img_login: TImage
         Left = 0
         Top = 0
         Width = 173
-        Height = 331
+        Height = 367
         Align = alClient
         Center = True
         Picture.Data = {
@@ -219,20 +217,19 @@ object Frm_Login: TFrm_Login
     object pnl_center: TPanel
       Left = 173
       Top = 0
-      Width = 428
-      Height = 331
+      Width = 442
+      Height = 367
       Align = alClient
       BevelOuter = bvNone
       Color = clMedGray
       ParentBackground = False
       TabOrder = 1
-      ExplicitLeft = 179
-      ExplicitWidth = 412
-      ExplicitHeight = 311
+      ExplicitWidth = 426
+      ExplicitHeight = 328
       object pnl_top: TPanel
         Left = 0
         Top = 0
-        Width = 428
+        Width = 442
         Height = 68
         Align = alTop
         BevelOuter = bvNone
@@ -240,10 +237,11 @@ object Frm_Login: TFrm_Login
         Padding.Top = 10
         ParentBackground = False
         TabOrder = 0
+        ExplicitWidth = 426
         object lbl_top: TLabel
           Left = 0
           Top = 10
-          Width = 428
+          Width = 442
           Height = 58
           Align = alClient
           Alignment = taCenter
@@ -256,66 +254,82 @@ object Frm_Login: TFrm_Login
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          ExplicitLeft = 6
-          ExplicitTop = 4
-          ExplicitWidth = 412
-          ExplicitHeight = 54
+          ExplicitWidth = 77
+          ExplicitHeight = 40
         end
       end
       object pnl_usuario: TPanel
         Left = 0
         Top = 68
-        Width = 428
-        Height = 85
+        Width = 442
+        Height = 165
         Align = alTop
         BevelOuter = bvNone
         Padding.Left = 90
         Padding.Top = 20
         Padding.Right = 90
         TabOrder = 1
-        ExplicitLeft = 6
-        ExplicitTop = 74
-        object lbl_usuario: TLabel
-          Left = 90
-          Top = 20
-          Width = 248
+        ExplicitWidth = 426
+        object lbl_senha: TLabel
+          Left = 96
+          Top = 101
+          Width = 52
           Height = 25
-          Align = alTop
-          Caption = 'Usu'#225'rio'
+          Caption = 'Senha'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -19
-          Font.Name = 'Segoe UI'
+          Font.Name = 'Segoe UI Semibold'
           Font.Style = [fsBold]
           ParentFont = False
-          ExplicitLeft = 6
-          ExplicitTop = 6
-          ExplicitWidth = 410
         end
-        object txt_usuario: TEdit
+        object pnl_senha: TPanel
           Left = 90
-          Top = 45
-          Width = 248
-          Height = 25
+          Top = 20
+          Width = 262
+          Height = 61
           Align = alTop
+          BevelOuter = bvNone
+          Padding.Left = 90
+          Padding.Top = 10
+          Padding.Right = 90
           TabOrder = 0
-          ExplicitLeft = 1
-          ExplicitTop = 26
-          ExplicitWidth = 410
+          ExplicitWidth = 246
+          object lbl_usuario: TLabel
+            Left = 8
+            Top = -5
+            Width = 65
+            Height = 25
+            Caption = 'Usu'#225'rio'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -19
+            Font.Name = 'Segoe UI Semibold'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+        end
+        object txt_senha: TEdit
+          Left = 96
+          Top = 132
+          Width = 211
+          Height = 23
+          PasswordChar = '*'
+          TabOrder = 1
         end
       end
       object pnl_bottom: TPanel
         Left = 0
         Top = 233
-        Width = 428
-        Height = 98
+        Width = 442
+        Height = 134
         Align = alClient
         BevelOuter = bvNone
         Padding.Left = 150
         Padding.Right = 150
         TabOrder = 2
-        ExplicitLeft = 6
-        ExplicitHeight = 104
+        ExplicitWidth = 426
+        ExplicitHeight = 95
         object btn_entrar: TButton
           Left = 72
           Top = 19
@@ -346,48 +360,16 @@ object Frm_Login: TFrm_Login
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 1
-        end
-      end
-      object pnl_senha: TPanel
-        Left = 0
-        Top = 153
-        Width = 428
-        Height = 80
-        Align = alTop
-        BevelOuter = bvNone
-        Padding.Left = 90
-        Padding.Top = 10
-        Padding.Right = 90
-        TabOrder = 3
-        ExplicitLeft = 6
-        ExplicitTop = 147
-        object lbl_senha: TLabel
-          Left = 90
-          Top = 10
-          Width = 248
-          Height = 25
-          Align = alTop
-          Caption = 'Senha'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -19
-          Font.Name = 'Segoe UI'
-          Font.Style = [fsBold]
-          ParentFont = False
-          ExplicitWidth = 54
-        end
-        object txt_senha: TEdit
-          Left = 90
-          Top = 35
-          Width = 248
-          Height = 23
-          Align = alTop
-          TabOrder = 0
-          ExplicitLeft = 120
-          ExplicitTop = 25
-          ExplicitWidth = 188
+          OnClick = btn_cancelarClick
         end
       end
     end
+  end
+  object txt_usuario: TEdit
+    Left = 269
+    Top = 114
+    Width = 211
+    Height = 23
+    TabOrder = 1
   end
 end
