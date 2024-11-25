@@ -20,7 +20,13 @@ object Frm_Principal: TFrm_Principal
     Top = 422
     Width = 624
     Height = 19
-    Panels = <>
+    Panels = <
+      item
+        Width = 200
+      end
+      item
+        Width = 300
+      end>
   end
   object MainMenu: TMainMenu
     Left = 576
@@ -38,5 +44,10 @@ object Frm_Principal: TFrm_Principal
     object main_ajuda: TMenuItem
       Caption = 'Ajuda'
     end
+  end
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    Left = 512
+    Top = 344
   end
 end

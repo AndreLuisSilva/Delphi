@@ -23,8 +23,6 @@ object Frm_Login: TFrm_Login
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 599
-    ExplicitHeight = 328
     object pnl_left: TPanel
       Left = 0
       Top = 0
@@ -35,7 +33,6 @@ object Frm_Login: TFrm_Login
       Color = cl3DLight
       ParentBackground = False
       TabOrder = 0
-      ExplicitHeight = 328
       object img_login: TImage
         Left = 0
         Top = 0
@@ -224,8 +221,6 @@ object Frm_Login: TFrm_Login
       Color = clMedGray
       ParentBackground = False
       TabOrder = 1
-      ExplicitWidth = 426
-      ExplicitHeight = 328
       object pnl_top: TPanel
         Left = 0
         Top = 0
@@ -237,7 +232,8 @@ object Frm_Login: TFrm_Login
         Padding.Top = 10
         ParentBackground = False
         TabOrder = 0
-        ExplicitWidth = 426
+        ExplicitLeft = 6
+        ExplicitTop = -6
         object lbl_top: TLabel
           Left = 0
           Top = 10
@@ -269,7 +265,6 @@ object Frm_Login: TFrm_Login
         Padding.Top = 20
         Padding.Right = 90
         TabOrder = 1
-        ExplicitWidth = 426
         object lbl_senha: TLabel
           Left = 96
           Top = 101
@@ -294,7 +289,6 @@ object Frm_Login: TFrm_Login
           Padding.Top = 10
           Padding.Right = 90
           TabOrder = 0
-          ExplicitWidth = 246
           object lbl_usuario: TLabel
             Left = 8
             Top = -5
@@ -328,8 +322,6 @@ object Frm_Login: TFrm_Login
         Padding.Left = 150
         Padding.Right = 150
         TabOrder = 2
-        ExplicitWidth = 426
-        ExplicitHeight = 95
         object btn_entrar: TButton
           Left = 72
           Top = 19

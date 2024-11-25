@@ -10,7 +10,9 @@ uses
   MonolitoFinanceiro.Model.Usuarios in 'src\Model\MonolitoFinanceiro.Model.Usuarios.pas' {DataModule_Usuarios: TDataModule},
   MonolitoFinanceiro.Utilitarios in 'src\Util\MonolitoFinanceiro.Utilitarios.pas',
   MonolitoFinanceiro.View.Login in 'src\View\MonolitoFinanceiro.View.Login.pas' {Frm_Login},
-  MonolitoFinanceiro.Model.Entidades.Usuarios in 'src\Model\Entidades\MonolitoFinanceiro.Model.Entidades.Usuarios.pas';
+  MonolitoFinanceiro.Model.Entidades.Usuarios in 'src\Model\Entidades\MonolitoFinanceiro.Model.Entidades.Usuarios.pas',
+  MonolitoFinanceiro.Model.Sistema in 'src\Model\MonolitoFinanceiro.Model.Sistema.pas' {DataModule_Sistema: TDataModule},
+  MonolitoFinanceiro.View.LoginUser in 'src\View\MonolitoFinanceiro.View.LoginUser.pas' {Frm_LoginUser};
 
 {$R *.res}
 
@@ -22,5 +24,7 @@ begin
   Application.CreateForm(TFrm_Principal, Frm_Principal);
   Application.CreateForm(TFrm_CadastroPadrao, Frm_CadastroPadrao);
   Application.CreateForm(TFrm_CadastroUsuarios, Frm_CadastroUsuarios);
+  Application.CreateForm(TDataModule_Sistema, DataModule_Sistema);
+  Application.CreateForm(TFrm_LoginUser, Frm_LoginUser);
   Application.Run;
 end.

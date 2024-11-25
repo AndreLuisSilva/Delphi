@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
-  Vcl.StdCtrls, MonolitoFinanceiro.Model.Usuarios;
+  Vcl.StdCtrls, MonolitoFinanceiro.Model.Usuarios, MonolitoFinanceiro.Model.Sistema;
 
 type
   TFrm_Login = class(TForm)
@@ -27,6 +27,7 @@ type
     procedure btn_entrarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btn_cancelarClick(Sender: TObject);
+    procedure LimparTxt(Sender: TObject);
 
   private
     { Private declarations }
@@ -64,7 +65,12 @@ begin
 
   try
     DataModule_Usuarios.efetuarLogin(Trim(txt_usuario.Text), Trim(txt_senha.Text));
+    DataModule_Sistema.dataUltimoAcesso(Now);
+    DataModule_Sistema.usuarioUltimoAcesso(DataModule_Usuarios.getUsuarioLogado.loginUsuarioLogado);
     ModalResult := mrOk;
+    LimparTxt(txt_usuario);
+    LimparTxt(txt_senha);
+
   Except
     on Erro: Exception do
     begin
@@ -78,7 +84,13 @@ end;
 
 procedure TFrm_Login.FormShow(Sender: TObject);
 begin
+  txt_usuario.Text := DataModule_Sistema.usuarioUltimoAcesso;
   txt_usuario.SetFocus;
+end;
+
+procedure TFrm_Login.LimparTxt(Sender: TObject);
+begin
+  if (Sender is TEdit) then (Sender as TEdit).Text := '';
 end;
 
 end.
