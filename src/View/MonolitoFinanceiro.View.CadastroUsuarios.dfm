@@ -3,6 +3,7 @@ inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
   StyleElements = [seFont, seClient, seBorder]
   TextHeight = 21
   inherited Pnl_Principal: TCardPanel
+    ActiveCard = card_cadastros
     StyleElements = [seFont, seClient, seBorder]
     inherited card_cadastros: TCard
       StyleElements = [seFont, seClient, seBorder]
@@ -38,6 +39,8 @@ inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
         StyleElements = [seFont, seClient, seBorder]
         inherited btn_salvar: TButton
           OnClick = btn_salvarClick
+          ExplicitLeft = 541
+          ExplicitTop = -8
         end
       end
       object txt_Nome: TEdit
@@ -95,6 +98,7 @@ inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
         StyleElements = [seFont, seClient, seBorder]
         inherited DBGrid1: TDBGrid
           DataSource = DS_Grid_Usuarios
+          PopupMenu = PopupMenu1
           Columns = <
             item
               Expanded = False
@@ -132,5 +136,13 @@ inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
     DataSet = DataModule_Usuarios.ClientDataSet_Usuarios
     Left = 601
     Top = 410
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 506
+    Top = 410
+    object btn_Limpar_Senha: TMenuItem
+      Caption = 'Limpar Senha'
+      OnClick = btn_Limpar_SenhaClick
+    end
   end
 end

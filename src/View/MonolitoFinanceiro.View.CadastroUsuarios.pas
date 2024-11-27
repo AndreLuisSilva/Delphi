@@ -8,7 +8,8 @@ uses
   Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.WinXPanels, Vcl.WinXCtrls,
   MonolitoFinanceiro.View.CadastroPadrao,
   MonolitoFinanceiro.Model.Usuarios,
-  MonolitoFinanceiro.Utilitarios;
+  MonolitoFinanceiro.Utilitarios,
+  BCrypt, Vcl.Menus;
 
 type
   TFrm_CadastroUsuarios = class(TFrm_CadastroPadrao)
@@ -21,6 +22,8 @@ type
     lbl_Login: TLabel;
     lbl_Senha: TLabel;
     lbl_Status: TLabel;
+    PopupMenu1: TPopupMenu;
+    btn_Limpar_Senha: TMenuItem;
     procedure btn_pesquisarClick(Sender: TObject);
     procedure btn_alterarClick(Sender: TObject);
     procedure btn_salvarClick(Sender: TObject);
@@ -28,6 +31,7 @@ type
     procedure limpar_Campos();
     procedure btn_cancelarClick(Sender: TObject);
     procedure btn_excluirClick(Sender: TObject);
+    procedure btn_Limpar_SenhaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -87,6 +91,20 @@ begin
 
 end;
 
+procedure TFrm_CadastroUsuarios.btn_Limpar_SenhaClick(Sender: TObject);
+begin
+  inherited;
+    if not DS_Grid_Usuarios.DataSet.IsEmpty then
+    begin
+      DataModule_Usuarios.limparSenha(DS_Grid_Usuarios.DataSet.FieldByName('ID').AsInteger);
+
+      Application.MessageBox(PWideChar(Format('Foi definida a senha padrão para o usuário "%s"',
+      [DS_Grid_Usuarios.DataSet.FieldByName('NOME').AsString])), 'Atenção', MB_OK + MB_ICONWARNING);
+
+    end;
+
+end;
+
 procedure TFrm_CadastroUsuarios.btn_pesquisarClick(Sender: TObject);
 begin
   inherited;
@@ -99,14 +117,14 @@ begin
 end;
 
 procedure TFrm_CadastroUsuarios.btn_salvarClick(Sender: TObject);
+var
+  LHash : String;
+  Mensagem : String;
+  Status : String;    //Variavel para controle do status do usuário
 begin
   inherited;
 
   DataModule_Usuarios.ClientDataSet_Usuarios.Edit;   //define dataset em modo de edição
-
-  var
-  Status : String;    //Variavel para controle do status do usuário
-
 
   //-------------------Validar campos de texto vazio--------------------
   if Trim(txt_Nome.Text) = '' then
@@ -130,7 +148,7 @@ begin
        Abort;
      end;
   //-------------------------------------------------------------------
-  if DataModule_Usuarios.temLoginCadastrado(Trim(txt_Login.Text), DataModule_Usuarios.ClientDataSet_Usuarios.FieldByName('ID').AsString) then
+  if DataModule_Usuarios.temLoginCadastrado(Trim(txt_Login.Text), DataModule_Usuarios.ClientDataSet_Usuarios.FieldByName('ID').AsInteger) then
     begin
       txt_Login.SetFocus;
       Application.MessageBox(PWideChar(Format('O login %s já se encontra cadastrado!', [txt_Login.Text])), 'Atenção', MB_OK + MB_ICONWARNING);
@@ -142,8 +160,12 @@ begin
   if tgl_Status.State = tssOff then
     Status := 'B';
 
+  Mensagem := 'Registro alterado com sucesso!';
+
   if DataModule_Usuarios.ClientDataSet_Usuarios.State in [dsInsert] then
   begin
+    Mensagem := 'Registro incluído com sucesso!';
+
     DataModule_Usuarios.ClientDataSet_Usuariosid.AsString := Utilitario.GetID;
     DataModule_Usuarios.ClientDataSet_Usuariosdata.AsDateTime := Now;
   end;
@@ -153,16 +175,18 @@ begin
  //--------------Altera valores dos campos de texto com os dados do-----
  //--------------dataset da linha selecionada no grid-------------------
 
+  LHash := TBCrypt.GenerateHash(Trim(txt_Senha.Text));
+
   DataModule_Usuarios.ClientDataSet_Usuariosnome.AsString := Trim(txt_Nome.Text);
   DataModule_Usuarios.ClientDataSet_Usuarioslogin.AsString := Trim(txt_Login.Text);
-  DataModule_Usuarios.ClientDataSet_Usuariossenha.AsString := Trim(txt_Senha.Text);
+  DataModule_Usuarios.ClientDataSet_Usuariossenha.AsString := LHash;
   DataModule_Usuarios.ClientDataSet_Usuariosstatus.AsString := Status;
  //----------------------------------------------------------------------
 
  //
  DataModule_Usuarios.ClientDataSet_Usuarios.Post;
  DataModule_Usuarios.ClientDataSet_Usuarios.ApplyUpdates(0);
- Application.MessageBox('Registro alterado com sucesso!', 'Atenção', MB_OK + MB_ICONINFORMATION);
+ Application.MessageBox(PWideChar(Mensagem), 'Atenção', MB_OK + MB_ICONINFORMATION);
 
  Pnl_Principal.ActiveCard := card_pesquisa;
 end;

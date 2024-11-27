@@ -14,32 +14,37 @@ object DataModule_Usuarios: TDataModule_Usuarios
     ProviderName = 'DataSetProvider_Usuarios'
     Left = 288
     Top = 392
-    object ClientDataSet_Usuariosid: TWideStringField
+    object ClientDataSet_Usuariosid: TLargeintField
       FieldName = 'id'
-      Size = 36
     end
     object ClientDataSet_Usuariosnome: TWideStringField
       FieldName = 'nome'
+      KeyFields = 'nome'
       Size = 50
     end
     object ClientDataSet_Usuarioslogin: TWideStringField
       FieldName = 'login'
+      KeyFields = 'login'
     end
     object ClientDataSet_Usuariossenha: TWideStringField
       FieldName = 'senha'
+      KeyFields = 'senha'
+      Size = 60
     end
     object ClientDataSet_Usuariosstatus: TWideStringField
       FieldName = 'status'
+      KeyFields = 'status'
       Size = 1
     end
     object ClientDataSet_Usuariosdata: TDateField
       FieldName = 'data'
+      KeyFields = 'data'
     end
   end
   object DataSetProvider_Usuarios: TDataSetProvider
     DataSet = Sql_Usuarios
     Options = [poAllowCommandText, poUseQuoteChar]
-    Left = 440
+    Left = 433
     Top = 392
   end
 end
