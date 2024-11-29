@@ -11,7 +11,8 @@ uses
   MonolitoFinanceiro.Utilitarios in 'src\Util\MonolitoFinanceiro.Utilitarios.pas',
   MonolitoFinanceiro.View.Login in 'src\View\MonolitoFinanceiro.View.Login.pas' {Frm_Login},
   MonolitoFinanceiro.Model.Entidades.Usuarios in 'src\Model\Entidades\MonolitoFinanceiro.Model.Entidades.Usuarios.pas',
-  MonolitoFinanceiro.Model.Sistema in 'src\Model\MonolitoFinanceiro.Model.Sistema.pas' {DataModule_Sistema: TDataModule};
+  MonolitoFinanceiro.Model.Sistema in 'src\Model\MonolitoFinanceiro.Model.Sistema.pas' {DataModule_Sistema: TDataModule},
+  MonolitoFinanceiro.View.RedefinirSenha in 'src\View\MonolitoFinanceiro.View.RedefinirSenha.pas' {Frm_RedefinirSenha};
 
 {$R *.res}
 

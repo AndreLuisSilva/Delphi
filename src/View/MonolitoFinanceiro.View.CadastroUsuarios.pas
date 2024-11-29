@@ -16,11 +16,9 @@ type
     DS_Grid_Usuarios: TDataSource;
     txt_Nome: TEdit;
     txt_Login: TEdit;
-    txt_Senha: TEdit;
     tgl_Status: TToggleSwitch;
     lbl_Nome: TLabel;
     lbl_Login: TLabel;
-    lbl_Senha: TLabel;
     lbl_Status: TLabel;
     PopupMenu1: TPopupMenu;
     btn_Limpar_Senha: TMenuItem;
@@ -32,6 +30,7 @@ type
     procedure btn_cancelarClick(Sender: TObject);
     procedure btn_excluirClick(Sender: TObject);
     procedure btn_Limpar_SenhaClick(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -52,7 +51,7 @@ begin
 
   txt_Nome.Text := DataModule_Usuarios.ClientDataSet_Usuariosnome.AsString;
   txt_Login.Text := DataModule_Usuarios.ClientDataSet_Usuarioslogin.AsString;
-  txt_Senha.Text := DataModule_Usuarios.ClientDataSet_Usuariossenha.AsString;
+  //txt_Senha.Text := DataModule_Usuarios.ClientDataSet_Usuariossenha.AsString;
   tgl_Status.State := tssOn;
   (**)
   if DataModule_Usuarios.ClientDataSet_Usuariosstatus.AsString = 'B' then
@@ -118,7 +117,7 @@ end;
 
 procedure TFrm_CadastroUsuarios.btn_salvarClick(Sender: TObject);
 var
-  LHash : String;
+  //LHash : String;
   Mensagem : String;
   Status : String;    //Variavel para controle do status do usuário
 begin
@@ -141,12 +140,13 @@ begin
        Abort;
      end;
 
-  if Trim(txt_Senha.Text) = '' then
+ { if Trim(txt_Senha.Text) = '' then
      begin
        txt_Senha.SetFocus;
        Application.MessageBox('O campo senha não poder vazio!', 'Atenção', MB_OK + MB_ICONWARNING);
        Abort;
      end;
+ }
   //-------------------------------------------------------------------
   if DataModule_Usuarios.temLoginCadastrado(Trim(txt_Login.Text), DataModule_Usuarios.ClientDataSet_Usuarios.FieldByName('ID').AsInteger) then
     begin
@@ -165,9 +165,11 @@ begin
   if DataModule_Usuarios.ClientDataSet_Usuarios.State in [dsInsert] then
   begin
     Mensagem := 'Registro incluído com sucesso!';
-
-    DataModule_Usuarios.ClientDataSet_Usuariosid.AsString := Utilitario.GetID;
+    //Removido Utilitario.GetID após ter sido alterado id do banco de dados para BIGINT AUTO INCREMENT
+    //DataModule_Usuarios.ClientDataSet_Usuariosid.AsString := Utilitario.GetID;
     DataModule_Usuarios.ClientDataSet_Usuariosdata.AsDateTime := Now;
+    DataModule_Usuarios.ClientDataSet_Usuariossenha.AsString := TBCrypt.GenerateHash(DataModule_Usuarios.SENHA_TEMP);
+    DataModule_Usuarios.ClientDataSet_Usuariossenha_temporaria.AsWideString := 'S';
   end;
 
  //---------------------------------------------------------------------
@@ -175,20 +177,20 @@ begin
  //--------------Altera valores dos campos de texto com os dados do-----
  //--------------dataset da linha selecionada no grid-------------------
 
-  LHash := TBCrypt.GenerateHash(Trim(txt_Senha.Text));
+ //LHash := TBCrypt.GenerateHash(Trim(txt_Senha.Text));
 
   DataModule_Usuarios.ClientDataSet_Usuariosnome.AsString := Trim(txt_Nome.Text);
   DataModule_Usuarios.ClientDataSet_Usuarioslogin.AsString := Trim(txt_Login.Text);
-  DataModule_Usuarios.ClientDataSet_Usuariossenha.AsString := LHash;
+ //DataModule_Usuarios.ClientDataSet_Usuariossenha.AsString := LHash;
   DataModule_Usuarios.ClientDataSet_Usuariosstatus.AsString := Status;
  //----------------------------------------------------------------------
 
- //
  DataModule_Usuarios.ClientDataSet_Usuarios.Post;
  DataModule_Usuarios.ClientDataSet_Usuarios.ApplyUpdates(0);
  Application.MessageBox(PWideChar(Mensagem), 'Atenção', MB_OK + MB_ICONINFORMATION);
 
  Pnl_Principal.ActiveCard := card_pesquisa;
+ btn_pesquisarClick(Nil);
 end;
 
 procedure TFrm_CadastroUsuarios.limpar_Campos;

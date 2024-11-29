@@ -40,6 +40,11 @@ object DataModule_Usuarios: TDataModule_Usuarios
       FieldName = 'data'
       KeyFields = 'data'
     end
+    object ClientDataSet_Usuariossenha_temporaria: TWideStringField
+      FieldName = 'senha_temporaria'
+      KeyFields = 'senha_temporaria'
+      Size = 1
+    end
   end
   object DataSetProvider_Usuarios: TDataSetProvider
     DataSet = Sql_Usuarios

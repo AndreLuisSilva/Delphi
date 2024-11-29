@@ -4,8 +4,8 @@ object Frm_Login: TFrm_Login
   BorderIcons = [biSystemMenu]
   BorderStyle = bsNone
   Caption = 'Login'
-  ClientHeight = 367
-  ClientWidth = 615
+  ClientHeight = 350
+  ClientWidth = 599
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,26 +18,29 @@ object Frm_Login: TFrm_Login
   object pnl_pricipal: TPanel
     Left = 0
     Top = 0
-    Width = 615
-    Height = 367
+    Width = 599
+    Height = 350
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 615
+    ExplicitHeight = 367
     object pnl_left: TPanel
       Left = 0
       Top = 0
       Width = 173
-      Height = 367
+      Height = 350
       Align = alLeft
       BevelOuter = bvNone
       Color = cl3DLight
       ParentBackground = False
       TabOrder = 0
+      ExplicitHeight = 367
       object img_login: TImage
         Left = 0
         Top = 0
         Width = 173
-        Height = 367
+        Height = 350
         Align = alClient
         Center = True
         Picture.Data = {
@@ -214,17 +217,19 @@ object Frm_Login: TFrm_Login
     object pnl_center: TPanel
       Left = 173
       Top = 0
-      Width = 442
-      Height = 367
+      Width = 426
+      Height = 350
       Align = alClient
       BevelOuter = bvNone
       Color = clMedGray
       ParentBackground = False
       TabOrder = 1
+      ExplicitWidth = 442
+      ExplicitHeight = 367
       object pnl_top: TPanel
         Left = 0
         Top = 0
-        Width = 442
+        Width = 426
         Height = 68
         Align = alTop
         BevelOuter = bvNone
@@ -232,12 +237,11 @@ object Frm_Login: TFrm_Login
         Padding.Top = 10
         ParentBackground = False
         TabOrder = 0
-        ExplicitLeft = 6
-        ExplicitTop = -6
+        ExplicitWidth = 442
         object lbl_top: TLabel
           Left = 0
           Top = 10
-          Width = 442
+          Width = 426
           Height = 58
           Align = alClient
           Alignment = taCenter
@@ -257,7 +261,7 @@ object Frm_Login: TFrm_Login
       object pnl_usuario: TPanel
         Left = 0
         Top = 68
-        Width = 442
+        Width = 426
         Height = 165
         Align = alTop
         BevelOuter = bvNone
@@ -265,6 +269,9 @@ object Frm_Login: TFrm_Login
         Padding.Top = 20
         Padding.Right = 90
         TabOrder = 1
+        ExplicitLeft = 6
+        ExplicitTop = 62
+        ExplicitWidth = 442
         object lbl_senha: TLabel
           Left = 96
           Top = 101
@@ -281,7 +288,7 @@ object Frm_Login: TFrm_Login
         object pnl_senha: TPanel
           Left = 90
           Top = 20
-          Width = 262
+          Width = 246
           Height = 61
           Align = alTop
           BevelOuter = bvNone
@@ -289,6 +296,7 @@ object Frm_Login: TFrm_Login
           Padding.Top = 10
           Padding.Right = 90
           TabOrder = 0
+          ExplicitWidth = 262
           object lbl_usuario: TLabel
             Left = 8
             Top = -5
@@ -315,13 +323,15 @@ object Frm_Login: TFrm_Login
       object pnl_bottom: TPanel
         Left = 0
         Top = 233
-        Width = 442
-        Height = 134
+        Width = 426
+        Height = 117
         Align = alClient
         BevelOuter = bvNone
         Padding.Left = 150
         Padding.Right = 150
         TabOrder = 2
+        ExplicitWidth = 442
+        ExplicitHeight = 134
         object btn_entrar: TButton
           Left = 72
           Top = 19

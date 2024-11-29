@@ -22,6 +22,7 @@ type
     ClientDataSet_Usuariosstatus: TWideStringField;
     ClientDataSet_Usuariosdata: TDateField;
     ClientDataSet_Usuariosid: TLargeintField;
+    ClientDataSet_Usuariossenha_temporaria: TWideStringField;
 
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
@@ -36,7 +37,7 @@ type
     function getUsuarioLogado: TModelEntidadeUsuario;
     procedure limparSenha(IDUsuario : Integer);
     procedure redefinirSenha(Usuario : TModelEntidadeUsuario);
-    const SENHA_TEMP = '1234';
+    const SENHA_TEMP = '1234'; //senha padrão temporária
   end;
 var
   DataModule_Usuarios: TDataModule_Usuarios;
@@ -77,6 +78,7 @@ begin
     raise Exception.Create('Usuários ou senha inválidos!');
 
   if not TBCrypt.CompareHash(Senha, SQLConsulta.FieldByName('SENHA').AsString) then
+
     raise Exception.Create('Senha inválida!');
 
   if SQLConsulta.FieldByName('STATUS').AsString <> 'A' then
@@ -85,6 +87,8 @@ begin
   FEntidadeUsuario.idUsuarioLogado := SQLConsulta.FieldByName('ID').AsString;
   FEntidadeUsuario.nomeUsuarioLogado := SQLConsulta.FieldByName('NOME').AsString;
   FEntidadeUsuario.loginUsuarioLogado := SQLConsulta.FieldByName('LOGIN').AsString;
+  FEntidadeUsuario.senhaTemporaria := SQLConsulta.FieldByName('SENHA_TEMPORARIA').AsString = 'S';
+  FEntidadeUsuario.senhaUsuarioLogado := SQLConsulta.FieldByName('SENHA').AsString;
  finally
   SQLConsulta.Close;
   SQLConsulta.Free;
@@ -116,8 +120,22 @@ begin
 end;
 
 procedure TDataModule_Usuarios.redefinirSenha(Usuario: TModelEntidadeUsuario);
+var
+  SQLQuery : TFDQuery;
 begin
-
+  SQLQuery := TFDQuery.Create(nil);
+  try
+    SQLQuery.Connection := DataModule_PgConexao.TFDConnection_PgConexao;
+    SQLQuery.SQL.Clear;
+    SQLQuery.SQL.Add('UPDATE usuarios SET senha_temporaria = :SENHA_TEMPORARIA, senha = :SENHA WHERE id = :ID');
+    SQLQuery.ParamByName('SENHA_TEMPORARIA').AsString := 'N';
+    SQLQuery.ParamByName('SENHA').AsString := TBCrypt.GenerateHash(Usuario.senhaUsuarioLogado);
+    SQLQuery.ParamByName('ID').AsInteger := Usuario.idUsuarioLogado.ToInteger();
+    SQLQuery.ExecSQL;
+  finally
+    SQLQuery.Close;
+    SQLQuery.Free;
+  end;
 end;
 
 function TDataModule_Usuarios.temLoginCadastrado(Login: String; ID: Integer): Boolean;

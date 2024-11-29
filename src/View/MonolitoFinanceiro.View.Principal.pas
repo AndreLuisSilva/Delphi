@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ComCtrls, Vcl.ExtCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.ComCtrls, Vcl.ExtCtrls,
+  MonolitoFinanceiro.View.RedefinirSenha;
 
 type
   TFrm_Principal = class(TForm)
@@ -58,6 +59,22 @@ begin
   finally
       FreeAndNil(Frm_Login);
   end;
+
+  if DataModule_Usuarios.getUsuarioLogado.senhaTemporaria then
+  begin
+    Frm_RedefinirSenha := TFrm_RedefinirSenha.Create(Nil);
+    try
+      Frm_RedefinirSenha.Usuario := DataModule_Usuarios.getUsuarioLogado;
+      Frm_RedefinirSenha.ShowModal;
+      if Frm_RedefinirSenha.ModalResult <> mrOk then
+      begin
+        Application.Terminate;
+      end;
+    finally
+      FreeAndNil(Frm_RedefinirSenha);
+    end;
+  end;
+
   StatusBar1.Panels.Items[1].Text := 'Usuário: ' + DataModule_Usuarios.getUsuarioLogado.nomeUsuarioLogado;
 end;
 

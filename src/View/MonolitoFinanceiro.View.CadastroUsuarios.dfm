@@ -3,7 +3,6 @@ inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
   StyleElements = [seFont, seClient, seBorder]
   TextHeight = 21
   inherited Pnl_Principal: TCardPanel
-    ActiveCard = card_cadastros
     StyleElements = [seFont, seClient, seBorder]
     inherited card_cadastros: TCard
       StyleElements = [seFont, seClient, seBorder]
@@ -21,16 +20,9 @@ inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
         Height = 21
         Caption = 'Login'
       end
-      object lbl_Senha: TLabel [2]
-        Left = 16
-        Top = 176
-        Width = 43
-        Height = 21
-        Caption = 'Senha'
-      end
-      object lbl_Status: TLabel [3]
-        Left = 16
-        Top = 232
+      object lbl_Status: TLabel [2]
+        Left = 17
+        Top = 174
         Width = 42
         Height = 21
         Caption = 'Status'
@@ -39,8 +31,6 @@ inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
         StyleElements = [seFont, seClient, seBorder]
         inherited btn_salvar: TButton
           OnClick = btn_salvarClick
-          ExplicitLeft = 541
-          ExplicitTop = -8
         end
       end
       object txt_Nome: TEdit
@@ -57,21 +47,14 @@ inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
         Height = 29
         TabOrder = 2
       end
-      object txt_Senha: TEdit
-        Left = 65
-        Top = 173
-        Width = 152
-        Height = 29
-        TabOrder = 3
-      end
       object tgl_Status: TToggleSwitch
-        Left = 72
-        Top = 232
+        Left = 65
+        Top = 174
         Width = 130
         Height = 23
         StateCaptions.CaptionOn = 'Ativo'
         StateCaptions.CaptionOff = 'Bloqueado'
-        TabOrder = 4
+        TabOrder = 3
       end
     end
     inherited card_pesquisa: TCard
