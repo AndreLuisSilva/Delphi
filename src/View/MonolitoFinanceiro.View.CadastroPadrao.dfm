@@ -68,6 +68,7 @@ object Frm_CadastroPadrao: TFrm_CadastroPadrao
           ImageMargins.Top = 5
           Images = ImageList1
           TabOrder = 1
+          OnClick = btn_salvarClick
         end
       end
     end
@@ -120,6 +121,7 @@ object Frm_CadastroPadrao: TFrm_CadastroPadrao
           ImageMargins.Top = 5
           Images = ImageList1
           TabOrder = 1
+          ExplicitTop = -6
         end
       end
       object pnl_botoes: TPanel
@@ -1826,5 +1828,10 @@ object Frm_CadastroPadrao: TFrm_CadastroPadrao
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
+  end
+  object DataSource1: TDataSource
+    DataSet = DataModule_Usuarios.ClientDataSet_Usuarios
+    Left = 617
+    Top = 410
   end
 end

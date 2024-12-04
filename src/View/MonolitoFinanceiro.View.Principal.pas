@@ -81,6 +81,7 @@ end;
 procedure TFrm_Principal.menu_usuariosClick(Sender: TObject);
 begin
    Frm_CadastroUsuarios.Show;
+   //Frm_CadastroPadrao.Show;
 end;
 
 procedure TFrm_Principal.Timer1Timer(Sender: TObject);

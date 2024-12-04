@@ -30,11 +30,12 @@ type
     procedure btn_cancelarClick(Sender: TObject);
     procedure btn_excluirClick(Sender: TObject);
     procedure btn_Limpar_SenhaClick(Sender: TObject);
-
   private
     { Private declarations }
   public
     { Public declarations }
+  protected
+    procedure Pesquisar; override;
   end;
 
 var
@@ -93,12 +94,12 @@ end;
 procedure TFrm_CadastroUsuarios.btn_Limpar_SenhaClick(Sender: TObject);
 begin
   inherited;
-    if not DS_Grid_Usuarios.DataSet.IsEmpty then
+    if not DataSource1.DataSet.IsEmpty then
     begin
-      DataModule_Usuarios.limparSenha(DS_Grid_Usuarios.DataSet.FieldByName('ID').AsInteger);
+      DataModule_Usuarios.limparSenha(DataSource1.DataSet.FieldByName('ID').AsInteger);
 
       Application.MessageBox(PWideChar(Format('Foi definida a senha padrão para o usuário "%s"',
-      [DS_Grid_Usuarios.DataSet.FieldByName('NOME').AsString])), 'Atenção', MB_OK + MB_ICONWARNING);
+      [DataSource1.DataSet.FieldByName('NOME').AsString])), 'Atenção', MB_OK + MB_ICONWARNING);
 
     end;
 
@@ -107,25 +108,16 @@ end;
 procedure TFrm_CadastroUsuarios.btn_pesquisarClick(Sender: TObject);
 begin
   inherited;
-  DataModule_Usuarios.ClientDataSet_Usuarios.Close;
-  DataModule_Usuarios.ClientDataSet_Usuarios.CommandText := 'SELECT * FROM usuarios';
-  DataModule_Usuarios.ClientDataSet_Usuarios.Open;
-  //  DataModule_Usuarios.Sql_Usuarios.SQL.Clear;
-  //  DataModule_Usuarios.Sql_Usuarios.SQL.Add('SELECT * FROM usuarios');
-  //  DataModule_Usuarios.Sql_Usuarios.Open;
+  Pesquisar;
 end;
 
 procedure TFrm_CadastroUsuarios.btn_salvarClick(Sender: TObject);
 var
-  //LHash : String;
-  Mensagem : String;
-  Status : String;    //Variavel para controle do status do usuário
+  Status : String;
 begin
-  inherited;
 
-  DataModule_Usuarios.ClientDataSet_Usuarios.Edit;   //define dataset em modo de edição
+  DataModule_Usuarios.ClientDataSet_Usuarios.Edit;
 
-  //-------------------Validar campos de texto vazio--------------------
   if Trim(txt_Nome.Text) = '' then
      begin
        txt_Nome.SetFocus;
@@ -140,57 +132,31 @@ begin
        Abort;
      end;
 
- { if Trim(txt_Senha.Text) = '' then
-     begin
-       txt_Senha.SetFocus;
-       Application.MessageBox('O campo senha não poder vazio!', 'Atenção', MB_OK + MB_ICONWARNING);
-       Abort;
-     end;
- }
-  //-------------------------------------------------------------------
   if DataModule_Usuarios.temLoginCadastrado(Trim(txt_Login.Text), DataModule_Usuarios.ClientDataSet_Usuarios.FieldByName('ID').AsInteger) then
     begin
       txt_Login.SetFocus;
       Application.MessageBox(PWideChar(Format('O login %s já se encontra cadastrado!', [txt_Login.Text])), 'Atenção', MB_OK + MB_ICONWARNING);
       Abort;
     end;
-  //---------valida o estado do usuário(ativado ou bloqueado)----------
+
   Status := 'A';
 
   if tgl_Status.State = tssOff then
     Status := 'B';
 
-  Mensagem := 'Registro alterado com sucesso!';
-
   if DataModule_Usuarios.ClientDataSet_Usuarios.State in [dsInsert] then
   begin
-    Mensagem := 'Registro incluído com sucesso!';
-    //Removido Utilitario.GetID após ter sido alterado id do banco de dados para BIGINT AUTO INCREMENT
-    //DataModule_Usuarios.ClientDataSet_Usuariosid.AsString := Utilitario.GetID;
     DataModule_Usuarios.ClientDataSet_Usuariosdata.AsDateTime := Now;
     DataModule_Usuarios.ClientDataSet_Usuariossenha.AsString := TBCrypt.GenerateHash(DataModule_Usuarios.SENHA_TEMP);
     DataModule_Usuarios.ClientDataSet_Usuariossenha_temporaria.AsWideString := 'S';
   end;
 
- //---------------------------------------------------------------------
-
- //--------------Altera valores dos campos de texto com os dados do-----
- //--------------dataset da linha selecionada no grid-------------------
-
- //LHash := TBCrypt.GenerateHash(Trim(txt_Senha.Text));
-
   DataModule_Usuarios.ClientDataSet_Usuariosnome.AsString := Trim(txt_Nome.Text);
   DataModule_Usuarios.ClientDataSet_Usuarioslogin.AsString := Trim(txt_Login.Text);
- //DataModule_Usuarios.ClientDataSet_Usuariossenha.AsString := LHash;
   DataModule_Usuarios.ClientDataSet_Usuariosstatus.AsString := Status;
- //----------------------------------------------------------------------
 
- DataModule_Usuarios.ClientDataSet_Usuarios.Post;
- DataModule_Usuarios.ClientDataSet_Usuarios.ApplyUpdates(0);
- Application.MessageBox(PWideChar(Mensagem), 'Atenção', MB_OK + MB_ICONINFORMATION);
-
- Pnl_Principal.ActiveCard := card_pesquisa;
- btn_pesquisarClick(Nil);
+  Pnl_Principal.ActiveCard := card_pesquisa;
+  inherited;
 end;
 
 procedure TFrm_CadastroUsuarios.limpar_Campos;
@@ -203,6 +169,18 @@ begin
     else if Components[contador] is TToggleSwitch then
       TToggleSwitch(Components[contador]).State := tssOn;
   end;
+
+end;
+
+procedure TFrm_CadastroUsuarios.Pesquisar;
+var
+  filtroPesquisa : String;
+begin
+  inherited;
+    filtroPesquisa := Utilitario.LikeFind(txt_pesquisar.Text, DBGrid1);
+    DataModule_Usuarios.ClientDataSet_Usuarios.Close;
+    DataModule_Usuarios.ClientDataSet_Usuarios.CommandText := 'SELECT * FROM usuarios ' + filtroPesquisa;
+    DataModule_Usuarios.ClientDataSet_Usuarios.Open;
 
 end;
 

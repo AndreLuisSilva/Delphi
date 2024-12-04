@@ -115,10 +115,13 @@ inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
       end
     end
   end
+  inherited DataSource1: TDataSource
+    Left = 601
+  end
   object DS_Grid_Usuarios: TDataSource
     DataSet = DataModule_Usuarios.ClientDataSet_Usuarios
-    Left = 601
-    Top = 410
+    Left = 409
+    Top = 409
   end
   object PopupMenu1: TPopupMenu
     Left = 506
