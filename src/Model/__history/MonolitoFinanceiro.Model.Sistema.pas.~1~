@@ -1,0 +1,51 @@
+unit MonolitoFinanceiro.Model.Sistema;
+
+interface
+
+uses
+  System.SysUtils, System.Classes;
+
+type
+  TDataModule1 = class(TDataModule)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function dataUltimoAcesso : String; overload;
+    procedure dataUltimoAcesso(aValue : TDatetime); overload;
+    function usuarioUltimoAcesso : String; overload;
+    procedure usuarioUltimoAcesso(aValue : String) overload;
+  end;
+
+var
+  DataModule1: TDataModule1;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+{ TDataModule1 }
+
+function TDataModule1.dataUltimoAcesso: String;
+begin
+
+end;
+
+procedure TDataModule1.dataUltimoAcesso(aValue: TDatetime);
+begin
+
+end;
+
+function TDataModule1.usuarioUltimoAcesso: String;
+begin
+
+end;
+
+procedure TDataModule1.usuarioUltimoAcesso(aValue: String);
+begin
+
+end;
+
+end.
