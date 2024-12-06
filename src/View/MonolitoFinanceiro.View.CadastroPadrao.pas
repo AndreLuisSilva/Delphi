@@ -5,8 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
-  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.WinXPanels, System.ImageList, Vcl.ImgList, DBClient,
-  MonolitoFinanceiro.Model.Conexao, MonolitoFinanceiro.Model.Usuarios;
+  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.WinXPanels, System.ImageList, Vcl.ImgList, DBClient, Vcl.WinXCtrls,
+  MonolitoFinanceiro.Model.Conexao;
 
 type
   TFrm_CadastroPadrao = class(TForm)
@@ -36,9 +36,11 @@ type
     procedure btn_alterarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btn_salvarClick(Sender: TObject);
+    procedure btn_excluirClick(Sender: TObject);
   private
     { Private declarations }
     procedure habilitarBotoes;
+    procedure limpar_Campos();
   public
     { Public declarations }
   protected
@@ -55,12 +57,29 @@ implementation
 
 procedure TFrm_CadastroPadrao.btn_alterarClick(Sender: TObject);
 begin
+  TClientDataSet(DataSource1.DataSet).Edit;
   Pnl_Principal.ActiveCard := card_cadastros;
 end;
 
 procedure TFrm_CadastroPadrao.btn_cancelarClick(Sender: TObject);
 begin
+  TClientDataSet(DataSource1.DataSet).Cancel;
   Pnl_Principal.ActiveCard := card_pesquisa;
+end;
+
+procedure TFrm_CadastroPadrao.btn_excluirClick(Sender: TObject);
+begin
+  if Application.MessageBox('Deseja realmente excluir o registro?', 'Atenção', MB_YESNO + MB_ICONQUESTION) <> mrYes then
+    exit;
+
+  try
+    TClientDataSet(DataSource1.DataSet).Delete;
+    TClientDataSet(DataSource1.DataSet).ApplyUpdates(0);
+    Application.MessageBox('Registro excluído com sucesso!', 'Atenção', MB_OK + MB_ICONINFORMATION);
+
+    Except on E : Exception do
+    Application.MessageBox(PWideChar(E.Message), 'Erro ao tentar excluir registro!', MB_OK + MB_ICONERROR);
+  end;
 end;
 
 procedure TFrm_CadastroPadrao.btn_fecharClick(Sender: TObject);
@@ -71,6 +90,8 @@ end;
 procedure TFrm_CadastroPadrao.btn_incluirClick(Sender: TObject);
 begin
    Pnl_Principal.ActiveCard := card_cadastros;
+   TClientDataSet(DataSource1.DataSet).Insert;
+   limpar_Campos;
 end;
 
 procedure TFrm_CadastroPadrao.btn_salvarClick(Sender: TObject);
@@ -98,6 +119,18 @@ procedure TFrm_CadastroPadrao.habilitarBotoes;
 begin
   btn_excluir.Enabled := not DataSource1.DataSet.IsEmpty;
   btn_alterar.Enabled := not DataSource1.DataSet.IsEmpty;
+end;
+
+procedure TFrm_CadastroPadrao.limpar_Campos;
+var contador : Integer;
+begin
+  for contador := 0 to Pred(ComponentCount) do
+  begin
+    if Components[contador] is TCustomEdit then
+      TCustomEdit(Components[contador]).Clear
+    else if Components[contador] is TToggleSwitch then
+      TToggleSwitch(Components[contador]).State := tssOn;
+  end;
 end;
 
 procedure TFrm_CadastroPadrao.Pesquisar;

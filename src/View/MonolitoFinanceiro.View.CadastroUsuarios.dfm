@@ -6,6 +6,7 @@ inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
     StyleElements = [seFont, seClient, seBorder]
     inherited card_cadastros: TCard
       StyleElements = [seFont, seClient, seBorder]
+      ExplicitLeft = 0
       object lbl_Nome: TLabel [0]
         Left = 16
         Top = 56
@@ -29,13 +30,10 @@ inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
       end
       inherited Panel1: TPanel
         StyleElements = [seFont, seClient, seBorder]
-        inherited btn_salvar: TButton
-          OnClick = btn_salvarClick
-        end
       end
       object txt_Nome: TEdit
         Left = 65
-        Top = 56
+        Top = 53
         Width = 240
         Height = 29
         TabOrder = 1

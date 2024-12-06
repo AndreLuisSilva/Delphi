@@ -121,7 +121,6 @@ object Frm_CadastroPadrao: TFrm_CadastroPadrao
           ImageMargins.Top = 5
           Images = ImageList1
           TabOrder = 1
-          ExplicitTop = -6
         end
       end
       object pnl_botoes: TPanel
@@ -204,6 +203,7 @@ object Frm_CadastroPadrao: TFrm_CadastroPadrao
           ImageMargins.Top = 5
           Images = ImageList1
           TabOrder = 4
+          OnClick = btn_excluirClick
         end
       end
       object pnl_grid: TPanel

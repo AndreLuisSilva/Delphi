@@ -25,12 +25,8 @@ type
     procedure btn_pesquisarClick(Sender: TObject);
     procedure btn_alterarClick(Sender: TObject);
     procedure btn_salvarClick(Sender: TObject);
-    procedure btn_incluirClick(Sender: TObject);
-    procedure limpar_Campos();
-    procedure btn_cancelarClick(Sender: TObject);
-    procedure btn_excluirClick(Sender: TObject);
     procedure btn_Limpar_SenhaClick(Sender: TObject);
-  private
+                                                          private
     { Private declarations }
   public
     { Public declarations }
@@ -52,43 +48,11 @@ begin
 
   txt_Nome.Text := DataModule_Usuarios.ClientDataSet_Usuariosnome.AsString;
   txt_Login.Text := DataModule_Usuarios.ClientDataSet_Usuarioslogin.AsString;
-  //txt_Senha.Text := DataModule_Usuarios.ClientDataSet_Usuariossenha.AsString;
+
   tgl_Status.State := tssOn;
-  (**)
+
   if DataModule_Usuarios.ClientDataSet_Usuariosstatus.AsString = 'B' then
     tgl_Status.State := tssOff;
-
-end;
-
-procedure TFrm_CadastroUsuarios.btn_cancelarClick(Sender: TObject);
-begin
-  inherited;
-  DataModule_Usuarios.ClientDataSet_Usuarios.Cancel;
-end;
-
-procedure TFrm_CadastroUsuarios.btn_excluirClick(Sender: TObject);
-begin
-  inherited;
-    if Application.MessageBox('Deseja realmente excluir o registro?', 'Atenção', MB_YESNO + MB_ICONQUESTION) <> mrYes then
-      exit;
-
-     try
-      DataModule_Usuarios.ClientDataSet_Usuarios.Delete;
-      DataModule_Usuarios.ClientDataSet_Usuarios.ApplyUpdates(0);
-      Application.MessageBox('Registro excluído com sucesso!', 'Atenção', MB_OK + MB_ICONINFORMATION);
-     Except on E : Exception do
-      Application.MessageBox(PWideChar(E.Message), 'Erro ao tentar excluir registro!', MB_OK + MB_ICONERROR);
-     end;
-
-end;
-
-procedure TFrm_CadastroUsuarios.btn_incluirClick(Sender: TObject);
-begin
-  inherited;
-
-  limpar_Campos;
-  DataModule_Usuarios.ClientDataSet_Usuarios.Insert;
-
 end;
 
 procedure TFrm_CadastroUsuarios.btn_Limpar_SenhaClick(Sender: TObject);
@@ -97,12 +61,9 @@ begin
     if not DataSource1.DataSet.IsEmpty then
     begin
       DataModule_Usuarios.limparSenha(DataSource1.DataSet.FieldByName('ID').AsInteger);
-
       Application.MessageBox(PWideChar(Format('Foi definida a senha padrão para o usuário "%s"',
       [DataSource1.DataSet.FieldByName('NOME').AsString])), 'Atenção', MB_OK + MB_ICONWARNING);
-
     end;
-
 end;
 
 procedure TFrm_CadastroUsuarios.btn_pesquisarClick(Sender: TObject);
@@ -155,33 +116,18 @@ begin
   DataModule_Usuarios.ClientDataSet_Usuarioslogin.AsString := Trim(txt_Login.Text);
   DataModule_Usuarios.ClientDataSet_Usuariosstatus.AsString := Status;
 
-  Pnl_Principal.ActiveCard := card_pesquisa;
   inherited;
-end;
-
-procedure TFrm_CadastroUsuarios.limpar_Campos;
-var contador : Integer;
-begin
-  for contador := 0 to Pred(ComponentCount) do
-  begin
-    if Components[contador] is TCustomEdit then
-      TCustomEdit(Components[contador]).Clear
-    else if Components[contador] is TToggleSwitch then
-      TToggleSwitch(Components[contador]).State := tssOn;
-  end;
-
 end;
 
 procedure TFrm_CadastroUsuarios.Pesquisar;
 var
   filtroPesquisa : String;
 begin
-  inherited;
     filtroPesquisa := Utilitario.LikeFind(txt_pesquisar.Text, DBGrid1);
     DataModule_Usuarios.ClientDataSet_Usuarios.Close;
     DataModule_Usuarios.ClientDataSet_Usuarios.CommandText := 'SELECT * FROM usuarios ' + filtroPesquisa;
     DataModule_Usuarios.ClientDataSet_Usuarios.Open;
-
+    inherited;
 end;
 
 end.
