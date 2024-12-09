@@ -1,0 +1,53 @@
+object DataModule1: TDataModule1
+  Height = 480
+  Width = 640
+  object Sql_Caixa: TFDQuery
+    Connection = DataModule_PgConexao.TFDConnection_PgConexao
+    Left = 552
+    Top = 392
+  end
+  object ClientDataSet_Caixa: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DataSetProvider_Caixa'
+    Left = 288
+    Top = 392
+    object ClientDataSet_Caixaid: TLargeintField
+      FieldName = 'id'
+    end
+    object ClientDataSet_Caixanome: TWideStringField
+      FieldName = 'nome'
+      KeyFields = 'nome'
+      Size = 50
+    end
+    object ClientDataSet_Caixalogin: TWideStringField
+      FieldName = 'login'
+      KeyFields = 'login'
+    end
+    object ClientDataSet_Caixasenha: TWideStringField
+      FieldName = 'senha'
+      KeyFields = 'senha'
+      Size = 60
+    end
+    object ClientDataSet_Caixastatus: TWideStringField
+      FieldName = 'status'
+      KeyFields = 'status'
+      Size = 1
+    end
+    object ClientDataSet_Caixadata: TDateField
+      FieldName = 'data'
+      KeyFields = 'data'
+    end
+    object ClientDataSet_Caixasenha_temporaria: TWideStringField
+      FieldName = 'senha_temporaria'
+      KeyFields = 'senha_temporaria'
+      Size = 1
+    end
+  end
+  object DataSetProvider_Caixa: TDataSetProvider
+    DataSet = Sql_Caixa
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 433
+    Top = 392
+  end
+end

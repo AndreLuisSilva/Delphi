@@ -169,6 +169,15 @@
             <Form>Frm_RedefinirSenha</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\View\MonolitoFinanceiro.View.Caixa.pas">
+            <Form>Frm_Caixa</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\Model\MonolitoFinanceiro.Model.Caixa.pas">
+            <Form>DataModule_Caixa</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

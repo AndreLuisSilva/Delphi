@@ -26,7 +26,8 @@ type
     procedure btn_alterarClick(Sender: TObject);
     procedure btn_salvarClick(Sender: TObject);
     procedure btn_Limpar_SenhaClick(Sender: TObject);
-                                                          private
+
+  private
     { Private declarations }
   public
     { Public declarations }

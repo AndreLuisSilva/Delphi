@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
   Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.WinXPanels, System.ImageList, Vcl.ImgList, DBClient, Vcl.WinXCtrls,
-  MonolitoFinanceiro.Model.Conexao;
+  MonolitoFinanceiro.Model.Conexao,
+  MonolitoFinanceiro.Utilitarios;
 
 type
   TFrm_CadastroPadrao = class(TForm)
@@ -113,6 +114,7 @@ procedure TFrm_CadastroPadrao.FormShow(Sender: TObject);
 begin
   Pnl_Principal.ActiveCard := card_pesquisa;
   Pesquisar;
+  Utilitario.DimensionarGrid(DBGrid1);
 end;
 
 procedure TFrm_CadastroPadrao.habilitarBotoes;

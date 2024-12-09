@@ -6,7 +6,6 @@ inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
     StyleElements = [seFont, seClient, seBorder]
     inherited card_cadastros: TCard
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitLeft = 0
       object lbl_Nome: TLabel [0]
         Left = 16
         Top = 56
@@ -71,9 +70,6 @@ inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
       end
       inherited pnl_botoes: TPanel
         StyleElements = [seFont, seClient, seBorder]
-        inherited btn_excluir: TButton
-          OnClick = btn_excluirClick
-        end
       end
       inherited pnl_grid: TPanel
         StyleElements = [seFont, seClient, seBorder]
@@ -92,20 +88,20 @@ inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
               Expanded = False
               FieldName = 'nome'
               Title.Caption = 'Nome'
-              Width = 409
+              Width = 328
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'status'
               Title.Caption = 'Status'
-              Width = 61
+              Width = 82
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'data'
-              Title.Caption = 'Data'
+              Title.Caption = ' Data Cadastro'
               Width = 118
               Visible = True
             end>

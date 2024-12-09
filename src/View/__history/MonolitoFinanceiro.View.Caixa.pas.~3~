@@ -1,0 +1,27 @@
+unit MonolitoFinanceiro.View.Caixa;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  MonolitoFinanceiro.View.CadastroPadrao, Data.DB, System.ImageList,
+  Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.WinXPanels;
+
+type
+  TFrm_CadastroPadrao1 = class(TFrm_CadastroPadrao)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Frm_CadastroPadrao1: TFrm_CadastroPadrao1;
+
+implementation
+
+{$R *.dfm}
+
+end.

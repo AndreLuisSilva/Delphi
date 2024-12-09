@@ -38,6 +38,13 @@ object Frm_Principal: TFrm_Principal
         OnClick = menu_usuariosClick
       end
     end
+    object main_financeiro: TMenuItem
+      Caption = 'Financeiro'
+      object menu_caixa: TMenuItem
+        Caption = 'Caixa'
+        OnClick = menu_caixaClick
+      end
+    end
     object main_relatorios: TMenuItem
       Caption = 'Relat'#243'rios'
     end
