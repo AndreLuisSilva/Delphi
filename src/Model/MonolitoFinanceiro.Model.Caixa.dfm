@@ -12,30 +12,31 @@ object DataModule_Caixa: TDataModule_Caixa
     ProviderName = 'DataSetProvider_Caixa'
     Left = 288
     Top = 392
-    object ClientDataSet_Caixa_id: TLargeintField
-      FieldName = '_id'
+    object ClientDataSet_Caixaid: TLargeintField
+      FieldName = 'id'
     end
-    object ClientDataSet_Caixa_numero_doc: TWideStringField
-      FieldName = '_numero_doc'
+    object ClientDataSet_Caixanumero_doc: TWideStringField
+      FieldName = 'numero_doc'
     end
-    object ClientDataSet_Caixa_descricao: TWideStringField
-      FieldName = '_descricao'
+    object ClientDataSet_Caixadescricao: TWideStringField
+      FieldName = 'descricao'
       Size = 200
     end
-    object ClientDataSet_Caixa_valor: TFMTBCDField
-      FieldName = '_valor'
+    object ClientDataSet_Caixavalor: TFMTBCDField
+      FieldName = 'valor'
       Size = 18
     end
-    object ClientDataSet_Caixa_tipo: TWideStringField
-      FieldName = '_tipo'
+    object ClientDataSet_Caixatipo: TWideStringField
+      FieldName = 'tipo'
       Size = 1
     end
-    object ClientDataSet_Caixa_data_cadastro: TDateField
-      FieldName = '_data_cadastro'
+    object ClientDataSet_Caixadata_cadastro: TDateField
+      FieldName = 'data_cadastro'
     end
   end
   object DataSetProvider_Caixa: TDataSetProvider
     DataSet = Sql_Caixa
+    Options = [poAllowCommandText, poUseQuoteChar]
     Left = 432
     Top = 392
   end

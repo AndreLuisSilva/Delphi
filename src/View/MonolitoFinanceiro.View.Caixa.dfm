@@ -3,9 +3,11 @@ inherited Frm_Caixa: TFrm_Caixa
   StyleElements = [seFont, seClient, seBorder]
   TextHeight = 21
   inherited Pnl_Principal: TCardPanel
+    ActiveCard = card_cadastros
     StyleElements = [seFont, seClient, seBorder]
     inherited card_cadastros: TCard
       StyleElements = [seFont, seClient, seBorder]
+      ExplicitLeft = 2
       object lbl_num_doc: TLabel [0]
         Left = 16
         Top = 24
@@ -51,7 +53,7 @@ inherited Frm_Caixa: TFrm_Caixa
         Height = 29
         TabOrder = 3
       end
-      object tad_tipo: TRadioGroup
+      object rad_tipo: TRadioGroup
         Left = 16
         Top = 168
         Width = 425
@@ -74,6 +76,9 @@ inherited Frm_Caixa: TFrm_Caixa
         inherited txt_pesquisar: TEdit
           StyleElements = [seFont, seClient, seBorder]
         end
+        inherited btn_pesquisar: TButton
+          OnClick = btn_pesquisarClick
+        end
       end
       inherited pnl_botoes: TPanel
         StyleElements = [seFont, seClient, seBorder]
@@ -85,36 +90,39 @@ inherited Frm_Caixa: TFrm_Caixa
           Columns = <
             item
               Expanded = False
-              FieldName = '_numero_doc'
+              FieldName = 'numero_doc'
               Title.Caption = 'N'#186' Documento'
               Visible = True
             end
             item
               Expanded = False
-              FieldName = '_descricao'
+              FieldName = 'descricao'
               Title.Caption = 'Descri'#231#227'o'
               Visible = True
             end
             item
               Expanded = False
-              FieldName = '_valor'
+              FieldName = 'valor'
               Title.Caption = 'Valor'
               Visible = True
             end
             item
               Expanded = False
-              FieldName = '_tipo'
+              FieldName = 'tipo'
               Title.Caption = 'Tipo'
               Visible = True
             end
             item
               Expanded = False
-              FieldName = '_data_cadastro'
+              FieldName = 'data_cadastro'
               Title.Caption = 'Data Cadastro'
               Visible = True
             end>
         end
       end
     end
+  end
+  inherited DataSource1: TDataSource
+    DataSet = DataModule_Caixa.ClientDataSet_Caixa
   end
 end

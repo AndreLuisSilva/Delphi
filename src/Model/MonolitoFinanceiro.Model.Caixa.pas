@@ -13,13 +13,12 @@ type
     Sql_Caixa: TFDQuery;
     ClientDataSet_Caixa: TClientDataSet;
     DataSetProvider_Caixa: TDataSetProvider;
-    ClientDataSet_Caixa_id: TLargeintField;
-    ClientDataSet_Caixa_numero_doc: TWideStringField;
-    ClientDataSet_Caixa_descricao: TWideStringField;
-    ClientDataSet_Caixa_valor: TFMTBCDField;
-    ClientDataSet_Caixa_tipo: TWideStringField;
-    ClientDataSet_Caixa_data_cadastro: TDateField;
-
+    ClientDataSet_Caixaid: TLargeintField;
+    ClientDataSet_Caixanumero_doc: TWideStringField;
+    ClientDataSet_Caixadescricao: TWideStringField;
+    ClientDataSet_Caixavalor: TFMTBCDField;
+    ClientDataSet_Caixatipo: TWideStringField;
+    ClientDataSet_Caixadata_cadastro: TDateField;
   private
     { Private declarations }
   public

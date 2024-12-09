@@ -3,6 +3,7 @@ inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
   StyleElements = [seFont, seClient, seBorder]
   TextHeight = 21
   inherited Pnl_Principal: TCardPanel
+    ActiveCard = card_cadastros
     StyleElements = [seFont, seClient, seBorder]
     inherited card_cadastros: TCard
       StyleElements = [seFont, seClient, seBorder]
