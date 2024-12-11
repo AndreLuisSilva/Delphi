@@ -7,7 +7,9 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
   Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.WinXPanels, System.ImageList, Vcl.ImgList, DBClient, Vcl.WinXCtrls,
   MonolitoFinanceiro.Model.Conexao,
-  MonolitoFinanceiro.Utilitarios;
+  MonolitoFinanceiro.Utilitarios,
+  MonolitoFinanceiro.Model.Caixa,
+  MonolitoFinanceiro.Model.Usuarios;
 
 type
   TFrm_CadastroPadrao = class(TForm)

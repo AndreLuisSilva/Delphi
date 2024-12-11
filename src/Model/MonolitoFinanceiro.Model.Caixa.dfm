@@ -3,7 +3,7 @@ object DataModule_Caixa: TDataModule_Caixa
   Width = 640
   object Sql_Caixa: TFDQuery
     Connection = DataModule_PgConexao.TFDConnection_PgConexao
-    Left = 544
+    Left = 552
     Top = 392
   end
   object ClientDataSet_Caixa: TClientDataSet
@@ -37,7 +37,7 @@ object DataModule_Caixa: TDataModule_Caixa
   object DataSetProvider_Caixa: TDataSetProvider
     DataSet = Sql_Caixa
     Options = [poAllowCommandText, poUseQuoteChar]
-    Left = 432
+    Left = 433
     Top = 392
   end
 end

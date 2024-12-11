@@ -22,6 +22,7 @@ type
     rad_tipo: TRadioGroup;
     procedure btn_pesquisarClick(Sender: TObject);
     procedure btn_salvarClick(Sender: TObject);
+    procedure btn_alterarClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -41,6 +42,19 @@ implementation
 
 { TFrm_Caixa }
 
+procedure TFrm_Caixa.btn_alterarClick(Sender: TObject);
+begin
+  inherited;
+  txt_num_doc.Text := DataModule_Caixa.ClientDataSet_Caixanumero_doc.AsString;
+  txt_descricao.Text := DataModule_Caixa.ClientDataSet_Caixadescricao.AsString;
+  txt_valor.Text := DataModule_Caixa.ClientDataSet_Caixavalor.AsString;
+
+  if DataModule_Caixa.ClientDataSet_Caixatipo.AsString = 'R' then
+    rad_tipo.ItemIndex := 0
+  else
+    rad_tipo.ItemIndex := 1;
+end;
+
 procedure TFrm_Caixa.btn_pesquisarClick(Sender: TObject);
 begin
   inherited;
@@ -49,7 +63,7 @@ end;
 
 procedure TFrm_Caixa.btn_salvarClick(Sender: TObject);
 var
-  Status : String;
+  LTipo : String;
 begin
 
   DataModule_Caixa.ClientDataSet_Caixa.Edit;
@@ -75,13 +89,20 @@ begin
     Abort;
   end;
 
+  LTipo := 'D';
+  if rad_tipo.ItemIndex = 0 then
+  LTipo:= 'R';
+
+  if DataSource1.State in [dsInsert] then
+    begin
+      DataModule_Caixa.ClientDataSet_Caixadata_cadastro.AsDateTime := Now;
+    end;
+
   DataModule_Caixa.ClientDataSet_Caixanumero_doc.AsWideString := Trim(txt_num_doc.Text);
   DataModule_Caixa.ClientDataSet_Caixadescricao.AsWideString := Trim(txt_descricao.Text);
-  DataModule_Caixa.ClientDataSet_Caixavalor.AsFloat := StrToFloat(txt_valor.Text);
-  DataModule_Caixa.ClientDataSet_Caixadata_cadastro.AsDateTime := Now;
+  DataModule_Caixa.ClientDataSet_Caixavalor.AsCurrency := StrToFloat(txt_valor.Text);
+  DataModule_Caixa.ClientDataSet_Caixatipo.AsString := LTipo;
 
-  if rad_tipo.ItemIndex = 0 then
-  DataModule_Caixa.ClientDataSet_Caixatipo.AsString := 'R' else if rad_tipo.ItemIndex = 1 then DataModule_Caixa.ClientDataSet_Caixatipo.AsString := 'D';
   inherited;
 
 end;

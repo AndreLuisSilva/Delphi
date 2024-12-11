@@ -111,6 +111,7 @@ inherited Frm_CadastroUsuarios: TFrm_CadastroUsuarios
     end
   end
   inherited DataSource1: TDataSource
+    DataSet = DataModule_Usuarios.ClientDataSet_Usuarios
     Left = 601
   end
   object DS_Grid_Usuarios: TDataSource

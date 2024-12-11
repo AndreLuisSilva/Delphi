@@ -98,24 +98,28 @@ inherited Frm_Caixa: TFrm_Caixa
               Expanded = False
               FieldName = 'descricao'
               Title.Caption = 'Descri'#231#227'o'
+              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'valor'
               Title.Caption = 'Valor'
+              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'tipo'
               Title.Caption = 'Tipo'
+              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'data_cadastro'
               Title.Caption = 'Data Cadastro'
+              Width = 64
               Visible = True
             end>
         end

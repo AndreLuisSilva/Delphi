@@ -1830,7 +1830,6 @@ object Frm_CadastroPadrao: TFrm_CadastroPadrao
       000000000000}
   end
   object DataSource1: TDataSource
-    DataSet = DataModule_Usuarios.ClientDataSet_Usuarios
     Left = 617
     Top = 410
   end
